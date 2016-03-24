@@ -140,6 +140,10 @@ function Performance() {
         this.testRunning = false;
         var now = new Date();
         this.testDuration = now.valueOf() - this.testStartTime.valueOf();
+        if (displayEdgeMessage && alreadyDisplayedEdgeMessage) {
+            // If we interupted with the "if you were using Edge" message, don't penalize the final time
+            this.testDuration -= TIME_TO_DISPLAY_EDGE_MSG;
+        }
     }
 
 
@@ -151,9 +155,9 @@ function Performance() {
         fps = (fps > 57) ? 60 : fps;
 
         surface.fillStyle = '#FFFFFF';
-        surface.font = "13pt Segoe UI";
-        surface.fillText("How fast can your browser speed read?", 50, surfaceHeight - 40);
-        surface.font = "9pt Verdana";
+        surface.font = "14pt Segoe UI";
+        surface.fillText("How fast can your browser speed read?", 30, surfaceHeight - 60);
+        surface.font = "10pt Segoe UI";
 
         var message = "";
 
@@ -187,7 +191,7 @@ function Performance() {
             message += "    Debug:" + this.debugText;
         }
 
-        surface.fillText(message, 50, surfaceHeight - 20);
+        surface.fillText(message, 30, surfaceHeight - 30);
     }
 
 

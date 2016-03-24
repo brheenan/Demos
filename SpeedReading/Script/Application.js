@@ -7,7 +7,7 @@ var SINGLE_CYCLE = 16.7;
 var NUMBER_CHARACTERS = 78;
 var ANIMATION_SPEED = 3;
 
-var MS_TO_WAIT_BEFORE_EDGE_MSG = 10000;
+var MS_TO_WAIT_BEFORE_EDGE_MSG = 15000;
 var TIME_TO_DISPLAY_EDGE_MSG = 5000;
 
 var NORMAL_MESSAGE_DISPLAY_TIME = 1500;
@@ -74,7 +74,7 @@ function DrawLoop() {
             perf.BeginDrawLoop();
         }
 
-        surface.fillStyle = '#333333'; //'#839EBA'; // was '#01294d'
+        surface.fillStyle = '#101010'; //'#839EBA'; // was '#01294d'
         surface.fillRect(0, 0, surfaceWidth, surfaceHeight);
         surface.drawImage(imgBackground, 0, 0, surfaceWidth, 800);
         billboard.Draw();

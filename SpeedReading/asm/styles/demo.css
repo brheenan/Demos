@@ -1,0 +1,257 @@
+input {
+  display: block;
+  margin-top: 20px;
+  position: absolute;
+}
+
+progress.gauge + .arrow {
+  position: absolute;
+  margin-top: -132px;
+
+  width: 238px;
+  height: 128px;
+  text-align: center;
+
+  -moz-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+
+  -moz-transition: transform 128ms;
+  -ms-transition: transform 128ms;
+  -webkit-transition: transform 128ms;
+  transition: transform 128ms;
+
+  z-index: 100;
+}
+
+progress.gauge {
+  cursor: pointer;
+  cursor: hand;
+  display: inline-block;
+  background: url(../images/speedometer.jpg) -1px 0 #cccccc;
+  border: solid 1px transparent;
+  border-radius: 238px 238px 0 0;
+
+  width: 238px;
+  height: 126px;
+  padding: 0;
+}
+
+.overlay {
+  cursor: pointer;
+  cursor: hand;
+  background: rgba(0,0,0,.5);
+  border: solid 1px transparent;
+  border-radius: 238px 238px 0 0;
+  opacity: 1;
+  padding: 14% 0 0 0;
+  -moz-transition: opacity .25s ease;
+  -ms-transition: opacity .25s ease;
+  -webkit-transition: opacity .25s ease;
+  transition: opacity .25s ease;
+}
+
+.overlay.off {
+  opacity: 0;
+}
+
+.overlay, .readout {
+  position: absolute;
+  text-align: center;
+  top: 0;
+}
+
+.readout {
+  padding: 14% 0 0 0;
+}
+
+.box, .overlay, .readout {
+  width:238px;
+  height:126px;
+  margin: 0 auto;
+}
+
+.overlay span.text, .readout span.text {
+  font-family:Helvetica;
+  font-weight:900;
+  font-size:70px;
+}
+
+.overlay span.text {
+  color:rgba(255,255,255,.85);
+}
+
+.readout span.text {
+  color:#fff;
+}
+
+progress.gauge::-moz-progress-bar {
+  background: transparent;
+}
+
+progress.gauge::-ms-fill {
+  background: transparent;
+}
+
+progress.gauge::-webkit-progress-bar {
+  background: url(../images/speedometer.jpg) -1px 0 #cccccc;
+  border-radius: 238px 238px 0 0;
+}
+
+progress.gauge::-webkit-progress-value {
+  background: transparent;
+}
+
+progress.gauge + .arrow img {
+  float: none;
+  border: none;
+  margin: 40px 0 0 0;
+}
+
+progress.gauge[value="0"] + .arrow {
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+progress.gauge[value="5"] + .arrow {
+  -moz-transform: rotate(279deg);
+  -ms-transform: rotate(279deg);
+  -webkit-transform: rotate(279deg);
+  transform: rotate(279deg);
+}
+
+progress.gauge[value="10"] + .arrow {
+  -moz-transform: rotate(288deg);
+  -ms-transform: rotate(288deg);
+  -webkit-transform: rotate(288deg);
+  transform: rotate(288deg);
+}
+
+progress.gauge[value="15"] + .arrow {
+  -moz-transform: rotate(297deg);
+  -ms-transform: rotate(297deg);
+  -webkit-transform: rotate(297deg);
+  transform: rotate(297deg);
+}
+
+progress.gauge[value="20"] + .arrow {
+  -moz-transform: rotate(306deg);
+  -ms-transform: rotate(306deg);
+  -webkit-transform: rotate(306deg);
+  transform: rotate(306deg);
+}
+
+progress.gauge[value="25"] + .arrow {
+  -moz-transform: rotate(315deg);
+  -ms-transform: rotate(315deg);
+  -webkit-transform: rotate(315deg);
+  transform: rotate(315deg);
+}
+
+progress.gauge[value="30"] + .arrow {
+  -moz-transform: rotate(324deg);
+  -ms-transform: rotate(324deg);
+  -webkit-transform: rotate(324deg);
+  transform: rotate(324deg);
+}
+
+progress.gauge[value="35"] + .arrow {
+  -moz-transform: rotate(333deg);
+  -ms-transform: rotate(333deg);
+  -webkit-transform: rotate(324deg);
+  transform: rotate(333deg);
+}
+
+progress.gauge[value="40"] + .arrow {
+  -moz-transform: rotate(342deg);
+  -ms-transform: rotate(342deg);
+  -webkit-transform: rotate(342deg);
+  transform: rotate(342deg);
+}
+
+progress.gauge[value="45"] + .arrow {
+  -moz-transform: rotate(351deg);
+  -ms-transform: rotate(351deg);
+  -webkit-transform: rotate(351deg);
+  transform: rotate(351deg);
+}
+
+progress.gauge[value="50"] + .arrow {
+  -moz-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+progress.gauge[value="55"] + .arrow {
+  -moz-transform: rotate(369deg);
+  -ms-transform: rotate(369deg);
+  -webkit-transform: rotate(369deg);
+  transform: rotate(369deg);
+}
+
+progress.gauge[value="60"] + .arrow {
+  -moz-transform: rotate(378deg);
+  -ms-transform: rotate(378deg);
+  -webkit-transform: rotate(378deg);
+  transform: rotate(378deg);
+}
+
+progress.gauge[value="65"] + .arrow {
+  -moz-transform: rotate(387deg);
+  -ms-transform: rotate(387deg);
+  -webkit-transform: rotate(387deg);
+  transform: rotate(387deg);
+}
+
+progress.gauge[value="70"] + .arrow {
+  -moz-transform: rotate(396deg);
+  -ms-transform: rotate(396deg);
+  -webkit-transform: rotate(396deg);
+  transform: rotate(396deg);
+}
+
+progress.gauge[value="75"] + .arrow {
+  -moz-transform: rotate(405deg);
+  -ms-transform: rotate(405deg);
+  -webkit-transform: rotate(405deg);
+  transform: rotate(405deg);
+}
+
+progress.gauge[value="80"] + .arrow {
+  -moz-transform: rotate(414deg);
+  -ms-transform: rotate(414deg);
+  -webkit-transform: rotate(414deg);
+  transform: rotate(414deg);
+}
+
+progress.gauge[value="85"] + .arrow {
+  -moz-transform: rotate(423deg);
+  -ms-transform: rotate(423deg);
+  -webkit-transform: rotate(423deg);
+  transform: rotate(423deg);
+}
+
+progress.gauge[value="90"] + .arrow {
+  -moz-transform: rotate(432deg);
+  -ms-transform: rotate(432deg);
+  -webkit-transform: rotate(432deg);
+  transform: rotate(432deg);
+}
+
+progress.gauge[value="95"] + .arrow {
+  -moz-transform: rotate(441deg);
+  -ms-transform: rotate(441deg);
+  -webkit-transform: rotate(441deg);
+  transform: rotate(441deg);
+}
+
+progress.gauge[value="100"] + .arrow {
+  -moz-transform: rotate(450deg);
+  -ms-transform: rotate(450deg);
+  -webkit-transform: rotate(450deg);
+  transform: rotate(450deg);
+}
