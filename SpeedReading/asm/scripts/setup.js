@@ -24,7 +24,7 @@
 var path = location.protocol + "//" + location.host + location.pathname.replace(/\b(Default|index)\.html$/, "") + 'asm/';
 
 function addAsmPlans() {
-    /*
+    
     var suites = [
         { name: "box2d", category: "Throughput", files: ["box2d_f32_2.js"] }
     ];
@@ -59,8 +59,8 @@ function addAsmPlans() {
             code: code.join("\n")
         });
     }
-    */
-
+    
+    /*
     suites = [
         { name: "zlib", category: "Throughput", files: ["zlib.js", "zlib-data.js"] }
     ];
@@ -94,6 +94,7 @@ function addAsmPlans() {
             code: code.join("\n")
         });
     }
+    */
 
     /*
     for (var i = 0; i < SimplePayload.length; ++i) {

@@ -245,9 +245,15 @@ function StartTest() {
     JetStream.start();
 }
 
-JetStream.onEnd(function(score) {
+JetStream.onEnd(function (score) {
+
+    // Bigger scores are better, so we want to flip it
+    score = Math.max(0, Math.min(5000, (8000 / score) - 1200));
+
     JetStream.removeEndListeners();
     JetStream.clearPlans();
+
+    
 
     currentFeature = 0;
     totalCallbackDuration = 0;
