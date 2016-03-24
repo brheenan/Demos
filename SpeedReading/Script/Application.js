@@ -242,6 +242,12 @@ function getBlankTimeoutTime() {
 /* ----------------------------------------------------------------------- Test --- */
 
 function StartTest() {
+    JetStream.start();
+}
+
+JetStream.onEnd(function(score) {
+    JetStream.removeEndListeners();
+    JetStream.clearPlans();
 
     currentFeature = 0;
     totalCallbackDuration = 0;
@@ -277,13 +283,19 @@ function StartTest() {
         } else {
             transitionAnimation = 'billboard.patterns.LeftToRightCascade()';
         }
-        featureList.push(new BillboardSequence(billboard.messages.BlankMessage(), false, true, false, true, true, false, 0, true, transitionAnimation, callbackToUse, getBlankTimeoutTime()));
+        featureList.push(new BillboardSequence(billboard.messages.BlankMessage(), false, true, false, true, true, false, 0, true, transitionAnimation, callbackToUse, score));
     }
-    
 
     DisplayNextFeature();
+});
 
-}
+JetStream.switchToQuick();
+addAsmPlans();
+
+
+
+
+
 
 function TestComplete_Callback() {
     perf.StopTest();
@@ -312,4 +324,3 @@ function DisplayBillboardFeatures() {
     DisplayNextFeature();
 
 }
-
