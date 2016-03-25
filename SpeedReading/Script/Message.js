@@ -138,7 +138,7 @@ function BillboardMessages() {
             case 11:
                 return ("GPU Powered      -Graphics       -Canvas         -SVG            -Video          -Text          ");
             case 12:
-                return ("New JavaScript   -True Compiler  -Fast Interpret -ECMAScript5    -Machine Code   -Chakra        ");
+                return ("New JavaScript   -True Compiler  -Fast Interpret -ECMAScript6    -Machine Code   -Chakra        ");
             case 13:
                 return ("CSS3             -Backgrounds    -Borders        -Color          -Fonts          -Media         ");
             case 14:
