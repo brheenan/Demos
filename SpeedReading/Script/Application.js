@@ -252,8 +252,6 @@ JetStream.onEnd(function (score) {
     // Constrain it to 0 - 2.5s
     score = Math.max(0, Math.min(2500, (9000 / score) - 1500));
 
-    console.log(score);
-
     JetStream.removeEndListeners();
     JetStream.clearPlans();
 
