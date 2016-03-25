@@ -124,13 +124,13 @@ function Performance() {
     this.StartTest = function () {
         this.testStarted = true;
         this.testRunning = true;
-        this.testStartTime = new Date();
+        this.testStartTime = performance.now();
     }
 
 
     this.hasBeen = function (interval) {
-        var now = new Date();
-        var totalTime = now.valueOf() - this.testStartTime.valueOf();
+        var now = performance.now();
+        var totalTime = now - this.testStartTime;
         return (totalTime >= interval);
     }
 
@@ -138,8 +138,8 @@ function Performance() {
 
     this.StopTest = function () {
         this.testRunning = false;
-        var now = new Date();
-        this.testDuration = now.valueOf() - this.testStartTime.valueOf();
+        var now = performance.now();
+        this.testDuration = now - this.testStartTime;
         if (displayEdgeMessage && alreadyDisplayedEdgeMessage) {
             // If we interupted with the "if you were using Edge" message, don't penalize the final time
             this.testDuration -= TIME_TO_DISPLAY_EDGE_MSG;
