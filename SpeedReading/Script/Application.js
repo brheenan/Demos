@@ -309,7 +309,7 @@ addAsmPlans();
 
 function TestComplete_Callback() {
     perf.StopTest();
-    var message = "                 Browser Score                   " + Math.floor(((perf.testDuration - totalCallbackDuration) / 1000)) + " Seconds";
+    var message = "                 Browser Score                   " + Math.floor((perf.testDuration / 1000)) + " Seconds";
     billboard.ApplyBillboardSequence(new BillboardSequence(message, true, true, true, true, true, true, 0, true, 'billboard.patterns.StartAtSameTime()', 'setTimeout(DisplayTryAgainButton, 800)', 0));
 }
 
