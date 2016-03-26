@@ -17,7 +17,7 @@ function Tile() {
 
     this.shadowAlpha = 1;
     this.shadowBaseAlpha = 0.132;
-    this.shadowMultiplier = 0.038;
+    this.shadowMultiplier = 0.02; //0.038;
 
     this.currentChar = 0;
     this.nextChar = 0;
@@ -159,6 +159,10 @@ function Tile() {
 
     // Draw the tile including the current visible characters.
     this.Draw = function () {
+	
+		tileStartTime = performance.now();
+		while (tileStartTime + tileSpinTime > performance.now()) {
+		}
 
         // Reset the character image strip.
         imgChar = imgCharBase;

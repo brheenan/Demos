@@ -7,10 +7,10 @@ var SINGLE_CYCLE = 16.7;
 var NUMBER_CHARACTERS = 78;
 var ANIMATION_SPEED = 3;
 
-var MS_TO_WAIT_BEFORE_EDGE_MSG = 30000;
+var MS_TO_WAIT_BEFORE_EDGE_MSG = 60000;
 var TIME_TO_DISPLAY_EDGE_MSG = 5000;
 
-var NORMAL_MESSAGE_DISPLAY_TIME = 1800;
+var NORMAL_MESSAGE_DISPLAY_TIME = 2200;
 
 var surface, surfaceWidth, surfaceHeight, surfaceCanvas, surfaceContext;
 var drawInterval;
@@ -33,7 +33,7 @@ var incrementRedraws = true;
 var displayEdgeMessage = true;
 var alreadyDisplayedEdgeMessage = false;
 
-
+var tileSpinTime = 0;
 
 
 
@@ -77,6 +77,8 @@ function DrawLoop() {
         surface.fillStyle = '#101010'; //'#839EBA'; // was '#01294d'
         surface.fillRect(0, 0, surfaceWidth, surfaceHeight);
         surface.drawImage(imgBackground, 0, 0, surfaceWidth, 800);
+		surface.fillStyle = '#0096ff';
+		surface.fillRect(0, 0, surfaceWidth, 10);
         billboard.Draw();
 
         if (startButtonVisible == true && startButtonHideCalled == false) {
@@ -248,15 +250,16 @@ function StartTest() {
 
 JetStream.onEnd(function (score) {
 
+	console.log("raw score: " + score);
+	tileSpinTime = Math.max(0,(Math.floor(10 / score) - 2));
+	console.log("tileSpinTime: " + tileSpinTime);
     // Bigger scores are better, so we want to flip it
     // Constrain it to 0 - 2.5s
-    score = Math.max(0, Math.min(2500, (9000 / score) - 1500));
+    var timeDelayFromBenchmark = Math.max(0, Math.min(2000, (4000 / score) - 1000));
 
     JetStream.removeEndListeners();
     JetStream.clearPlans();
-
-    
-
+	
     currentFeature = 0;
     totalCallbackDuration = 0;
 
@@ -272,7 +275,7 @@ JetStream.onEnd(function (score) {
 
     var NUM_OF_MESSAGES = 16;
     for (var i = 0; i < NUM_OF_MESSAGES; i++) {
-        featureList.push(new BillboardSequence(billboard.messages.getMessage(i), true, true, true, true, true, true, 0, true, 'billboard.patterns.Random(1)', 'DisplayNextFeature_Callback()', NORMAL_MESSAGE_DISPLAY_TIME + score));
+        featureList.push(new BillboardSequence(billboard.messages.getMessage(i), true, true, true, true, true, true, 0, true, 'billboard.patterns.Random(1)', 'DisplayNextFeature_Callback()', NORMAL_MESSAGE_DISPLAY_TIME + timeDelayFromBenchmark));
         var callbackToUse;
         if (i == NUM_OF_MESSAGES - 1) {
             callbackToUse = 'TestComplete_Callback()';
@@ -291,7 +294,7 @@ JetStream.onEnd(function (score) {
         } else {
             transitionAnimation = 'billboard.patterns.LeftToRightCascade()';
         }
-        featureList.push(new BillboardSequence(billboard.messages.BlankMessage(), false, true, false, true, true, false, 0, true, transitionAnimation, callbackToUse, score));
+        featureList.push(new BillboardSequence(billboard.messages.BlankMessage(), false, true, false, true, true, false, 0, true, transitionAnimation, callbackToUse, timeDelayFromBenchmark));
     }
 
     DisplayNextFeature();
@@ -300,19 +303,11 @@ JetStream.onEnd(function (score) {
 JetStream.switchToQuick();
 addAsmPlans();
 
-
-
-
-
-
 function TestComplete_Callback() {
     perf.StopTest();
     var message = "                 Browser Score                   " + Math.floor((perf.testDuration / 1000)) + " Seconds";
     billboard.ApplyBillboardSequence(new BillboardSequence(message, true, true, true, true, true, true, 0, true, 'billboard.patterns.StartAtSameTime()', 'setTimeout(DisplayTryAgainButton, 800)', 0));
 }
-
-
-
 
 /* ------------------------------------------------------------------------- Billboard Features --- */
 
