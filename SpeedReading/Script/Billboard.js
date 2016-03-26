@@ -224,7 +224,7 @@ function Billboard() {
     this.Draw = function () {
 
         // Draw the billboard and its reflection.
-        surface.drawImage(imgBillboardReflection, this.billboardLeft, this.billboardReflectionTop, this.billboardWidth, this.billboardHeight);
+        //surface.drawImage(imgBillboardReflection, this.billboardLeft, this.billboardReflectionTop, this.billboardWidth, this.billboardHeight);
         surface.drawImage(imgBillboardBackground, this.billboardLeft, this.billboardTop, this.billboardWidth, this.billboardHeight);
 
         // Draw the tiles on the billboard.

@@ -154,9 +154,9 @@ function Performance() {
         // Account for clock skew which can be up to two frames (33.33ms) when hardware accelerated.
         fps = (fps > 57) ? 60 : fps;
 
-        surface.fillStyle = '#FFFFFF';
+        surface.fillStyle = '#0096ff';
         surface.font = "14pt Segoe UI";
-        surface.fillText("How fast can your browser speed read?", 30, surfaceHeight - 60);
+        surface.fillText("Can your browser speed read?", 10, 40);
         surface.font = "10pt Segoe UI";
 
         var message = "";
@@ -190,8 +190,8 @@ function Performance() {
         if (debug == true) {
             message += "    Debug:" + this.debugText;
         }
-
-        surface.fillText(message, 30, surfaceHeight - 30);
+		surface.fillStyle = '#aaaaaa';
+        surface.fillText(message, 10, 70);
     }
 
 
