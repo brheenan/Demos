@@ -30,7 +30,7 @@ var tryAgainButtonHover = false;
 var redrawSurface = false;
 var incrementRedraws = true;
 
-var displayEdgeMessage = true;
+var displayEdgeMessage = false;
 var alreadyDisplayedEdgeMessage = false;
 
 var tileSpinTime = 0;
