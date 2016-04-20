@@ -225,7 +225,14 @@ function DisplayNextFeature_Callback() {
         justDisplayedEdgeMessage = true;
     } else {
         if (!justDisplayedEdgeMessage) {
-            setTimeout(DisplayNextFeature, featureList[currentFeature].callbackDuration);
+            JetStream.onEnd(function (score) {
+                tileSpinTime = Math.max(0,(Math.floor(10 / score) - 2));
+                var timeDelayFromBenchmark = Math.max(0, Math.min(2000, (4000 / score) - 1000));
+                setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
+            });
+            JetStream.switchToQuick();
+            addAsmPlans();
+            JetStream.start();
         } else {
             setTimeout(DisplayNextFeature, TIME_TO_DISPLAY_EDGE_MSG);
             justDisplayedEdgeMessage = false;
