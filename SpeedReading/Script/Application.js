@@ -229,6 +229,8 @@ function DisplayNextFeature_Callback() {
                 tileSpinTime = Math.max(0,(Math.floor(10 / score) - 2));
                 var timeDelayFromBenchmark = Math.max(0, Math.min(2000, (4000 / score) - 1000));
                 setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
+                JetStream.removeEndListeners();
+                JetStream.clearPlans();
             });
             JetStream.switchToQuick();
             addAsmPlans();
