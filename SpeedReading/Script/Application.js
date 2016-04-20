@@ -226,7 +226,9 @@ function DisplayNextFeature_Callback() {
     } else {
         if (!justDisplayedEdgeMessage) {
             JetStream.onEnd(function (score) {
+                console.log("raw score: " + score);
                 tileSpinTime = Math.max(0,(Math.floor(10 / score) - 2));
+                console.log("tileSpinTime: " + tileSpinTime);
                 var timeDelayFromBenchmark = Math.max(0, Math.min(2000, (4000 / score) - 1000));
                 setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
                 JetStream.removeEndListeners();
