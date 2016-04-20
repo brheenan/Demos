@@ -134,6 +134,7 @@ function BillboardMessages() {
             case 9:
                 return ("Thats why we    made over       5000 interop    improvements in Microsoft Edge.                 ");
             case 10:
+                return ("                  To build the    best browser  and web platform for Windows 10                 ");
             /*case 10:
                 return ("                We should also  mention a few   other           improvements...                 ");
             case 11:
