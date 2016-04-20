@@ -114,7 +114,7 @@ function BillboardMessages() {
     this.getMessage = function (i) {
         switch (i) {
             case 0: //   ||||||||||||||||----------------||||||||||||||||----------------||||||||||||||||----------------
-                return ("                Over 200 million devices are on    Windows 10        today.                     ");
+                return ("                Over 270 million devices are on    Windows 10        today.                     ");
             case 1:
                 return (" Most Windows    users spend     the most time   browsing        the web.                       ");
             case 2:
@@ -134,6 +134,7 @@ function BillboardMessages() {
             case 9:
                 return ("Thats why we    made over       5000 interop    improvements in Microsoft Edge.                 ");
             case 10:
+            /*case 10:
                 return ("                We should also  mention a few   other           improvements...                 ");
             case 11:
                 return ("GPU Powered      -Graphics       -Canvas         -SVG            -Video          -Text          ");
@@ -145,7 +146,6 @@ function BillboardMessages() {
                 return ("DOM L2/L3        -Core           -Events         -HTML           -Element        -Style         ");
             case 15:
                 return ("DOM L2/L3        -Traversal      -Range          -L3Core         -L3Events       -Whitespace    ");
-            /*
             case 0:
                 return ("There are over  one billion     Windows         customers in    the world today.                ");
             case 1:

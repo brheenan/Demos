@@ -273,7 +273,7 @@ JetStream.onEnd(function (score) {
     featureList.push(new BillboardSequence(billboard.messages.Set(), true, true, true, true, true, true, 0, true, 'billboard.patterns.StartAtSameTime()', 'DisplayNextFeature_Callback()', 800));
     featureList.push(new BillboardSequence(billboard.messages.Go(), true, true, true, true, true, true, 0, true, 'billboard.patterns.StartAtSameTime()', 'DisplayNextFeature_Callback()', 800));
 
-    var NUM_OF_MESSAGES = 16;
+    var NUM_OF_MESSAGES = 11;
     for (var i = 0; i < NUM_OF_MESSAGES; i++) {
         featureList.push(new BillboardSequence(billboard.messages.getMessage(i), true, true, true, true, true, true, 0, true, 'billboard.patterns.Random(1)', 'DisplayNextFeature_Callback()', NORMAL_MESSAGE_DISPLAY_TIME + timeDelayFromBenchmark));
         var callbackToUse;
