@@ -231,16 +231,25 @@ function DisplayNextFeature_Callback() {
                 tileSpinTime = Math.max(0,(Math.floor(10 / score) - 2));
                 console.log("tileSpinTime: " + tileSpinTime);
                 timeDelayFromBenchmark = Math.max(0, Math.min(2000, (4000 / score) - 1000));
+                if (featureList[currentFeature].message == "                                                                                                ") {
+                    setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
+                } else {
+                    setTimeout(DisplayNextFeature, NORMAL_MESSAGE_DISPLAY_TIME);
+                }
                 totalCallbackDuration += timeDelayFromBenchmark;
-                setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
+                
                 JetStream.removeEndListeners();
                 JetStream.clearPlans();
             });
             addAsmPlans();
-            JetStream.start();      
-            
+            JetStream.start();   
         } else {
-            setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
+            if (featureList[currentFeature].message == "                                                                                                ") {
+                setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
+            } else {
+                setTimeout(DisplayNextFeature, NORMAL_MESSAGE_DISPLAY_TIME);
+            }
+            totalCallbackDuration += timeDelayFromBenchmark;
         }
         currentFeature++;
     }
@@ -286,7 +295,7 @@ JetStream.onEnd(function (score) {
 
     var NUM_OF_MESSAGES = 11;
     for (var i = 0; i < NUM_OF_MESSAGES; i++) {
-        featureList.push(new BillboardSequence(billboard.messages.getMessage(i), true, true, true, true, true, true, 0, true, 'billboard.patterns.Random(1)', 'DisplayNextFeature_Callback()', NORMAL_MESSAGE_DISPLAY_TIME + timeDelayFromBenchmark));
+        featureList.push(new BillboardSequence(billboard.messages.getMessage(i), true, true, true, true, true, true, 0, true, 'billboard.patterns.Random(1)', 'DisplayNextFeature_Callback()', NORMAL_MESSAGE_DISPLAY_TIME));
         var callbackToUse;
         if (i == NUM_OF_MESSAGES - 1) {
             callbackToUse = 'TestComplete_Callback()';
