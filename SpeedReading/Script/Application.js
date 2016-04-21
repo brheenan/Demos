@@ -218,30 +218,30 @@ function DisplayNextFeature() {
     billboard.ApplyBillboardSequence(featureList[currentFeature]);
 }
 
+var timeDelayFromBenchmark;
 function DisplayNextFeature_Callback() {
 
     if (doDisplayIfEdgeMessage()) {
         setTimeout(function displayIfEdgeMessage() { billboard.ApplyBillboardSequence(ifEdgeSequence); }, featureList[currentFeature].callbackDuration);
         justDisplayedEdgeMessage = true;
     } else {
-        if (!justDisplayedEdgeMessage) {
+        if (currentFeature < 6) {
             JetStream.onEnd(function (score) {
                 console.log("raw score: " + score);
                 tileSpinTime = Math.max(0,(Math.floor(10 / score) - 2));
                 console.log("tileSpinTime: " + tileSpinTime);
-                var timeDelayFromBenchmark = Math.max(0, Math.min(2000, (4000 / score) - 1000));
+                timeDelayFromBenchmark = Math.max(0, Math.min(2000, (4000 / score) - 1000));
+                totalCallbackDuration += timeDelayFromBenchmark;
                 setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
                 JetStream.removeEndListeners();
                 JetStream.clearPlans();
             });
-            JetStream.switchToQuick();
             addAsmPlans();
-            JetStream.start();
+            JetStream.start();      
+            
         } else {
-            setTimeout(DisplayNextFeature, TIME_TO_DISPLAY_EDGE_MSG);
-            justDisplayedEdgeMessage = false;
+            setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
         }
-        totalCallbackDuration += featureList[currentFeature].callbackDuration;
         currentFeature++;
     }
 }
