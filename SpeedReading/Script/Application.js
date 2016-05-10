@@ -218,19 +218,39 @@ function DisplayNextFeature() {
     billboard.ApplyBillboardSequence(featureList[currentFeature]);
 }
 
+var timeDelayFromBenchmark;
 function DisplayNextFeature_Callback() {
 
     if (doDisplayIfEdgeMessage()) {
         setTimeout(function displayIfEdgeMessage() { billboard.ApplyBillboardSequence(ifEdgeSequence); }, featureList[currentFeature].callbackDuration);
         justDisplayedEdgeMessage = true;
     } else {
-        if (!justDisplayedEdgeMessage) {
-            setTimeout(DisplayNextFeature, featureList[currentFeature].callbackDuration);
+        if (currentFeature < 6) {
+            JetStream.onEnd(function (score) {
+                console.log("raw score: " + score);
+                tileSpinTime = Math.max(0,(Math.floor(10 / score) - 2));
+                console.log("tileSpinTime: " + tileSpinTime);
+                timeDelayFromBenchmark = Math.max(0, Math.min(2000, (4000 / score) - 1000));
+                if (featureList[currentFeature].message == "                                                                                                ") {
+                    setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
+                } else {
+                    setTimeout(DisplayNextFeature, NORMAL_MESSAGE_DISPLAY_TIME);
+                }
+                totalCallbackDuration += timeDelayFromBenchmark;
+                
+                JetStream.removeEndListeners();
+                JetStream.clearPlans();
+            });
+            addAsmPlans();
+            JetStream.start();   
         } else {
-            setTimeout(DisplayNextFeature, TIME_TO_DISPLAY_EDGE_MSG);
-            justDisplayedEdgeMessage = false;
+            if (featureList[currentFeature].message == "                                                                                                ") {
+                setTimeout(DisplayNextFeature, timeDelayFromBenchmark);
+            } else {
+                setTimeout(DisplayNextFeature, NORMAL_MESSAGE_DISPLAY_TIME);
+            }
+            totalCallbackDuration += timeDelayFromBenchmark;
         }
-        totalCallbackDuration += featureList[currentFeature].callbackDuration;
         currentFeature++;
     }
 }
@@ -275,7 +295,7 @@ JetStream.onEnd(function (score) {
 
     var NUM_OF_MESSAGES = 11;
     for (var i = 0; i < NUM_OF_MESSAGES; i++) {
-        featureList.push(new BillboardSequence(billboard.messages.getMessage(i), true, true, true, true, true, true, 0, true, 'billboard.patterns.Random(1)', 'DisplayNextFeature_Callback()', NORMAL_MESSAGE_DISPLAY_TIME + timeDelayFromBenchmark));
+        featureList.push(new BillboardSequence(billboard.messages.getMessage(i), true, true, true, true, true, true, 0, true, 'billboard.patterns.Random(1)', 'DisplayNextFeature_Callback()', NORMAL_MESSAGE_DISPLAY_TIME));
         var callbackToUse;
         if (i == NUM_OF_MESSAGES - 1) {
             callbackToUse = 'TestComplete_Callback()';
