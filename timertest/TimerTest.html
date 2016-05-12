@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Timer test</title>
+    </head>
+    <body>
+        <div id="mainContent">
+            <h1 id="resultLine">Executing every <span id="result">???</span> milliseconds.</h1>
+            <p id="debugLog"></p>
+        </div>
+        <script type="text/javascript">
+            "use strict";
+            
+            // Used to keep track of the last 100 (or some number of) call times.
+            var times = [];
+            var currentIndex = 0;   // Use this to make it curcular
+            var lastTime = performance.now();
+            
+            // This will be called by timers.
+            function mark() {
+                // Write in how long it's been since the last call to mark() to the array
+                var newTime = performance.now();
+                times[currentIndex] = newTime - lastTime;
+                lastTime = newTime;
+                
+                // This makes the array a circular array of the most recent X calls (X is defined after the %)
+                currentIndex = (currentIndex + 1) % 100;
+                
+                // Calculate the average of the last calls
+                var sumOfAll = 0;
+                for (var i = 0; i < times.length; i++) {
+                    sumOfAll += times[i];
+                }
+                var avgOfAll = sumOfAll / times.length;
+                
+                // And write it into the page
+                document.getElementById("result").innerHTML = Math.round(avgOfAll);
+                
+                // writeDebug();
+                
+                // Then call this again with setTimeout()
+                setTimeout(mark,1);
+            }
+            
+            // As necessary, this tells you what's in the array without needing to breakpoint or F12
+            function writeDebug() {
+                var debugString = "";
+                for (var i = 0; i < times.length; i++) {
+                    debugString += "<br/>" + Math.round(times[i] * 10) / 10;
+                }
+                document.getElementById("debugLog").innerHTML = debugString;
+            }
+            
+            setTimeout(mark, 1);
+            
+        </script>
+    </body>
+</html>
