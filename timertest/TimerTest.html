@@ -21,7 +21,6 @@
                 // Write in how long it's been since the last call to mark() to the array
                 var newTime = performance.now();
                 times[currentIndex] = newTime - lastTime;
-                lastTime = newTime;
                 
                 // This makes the array a circular array of the most recent X calls (X is defined after the %)
                 currentIndex = (currentIndex + 1) % 100;
@@ -39,6 +38,7 @@
                 // writeDebug();
                 
                 // Then call this again with setTimeout()
+                lastTime = performance.now();
                 setTimeout(mark,1);
             }
             
