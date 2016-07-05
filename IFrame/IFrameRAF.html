@@ -12,6 +12,9 @@
         
         var rafCount = 0;
         var stopRAF = false;
+        var mostRecentDelays = [];
+        var delaysIndex = 0;
+        var delaysToKepp = 5 * 60;	// Keep 5s worth of RAFs
 
         function RAFCallback() {
             var currentDate = new Date();
@@ -23,7 +26,10 @@
             }
             lastCallback = currentDate;
 
-            output1.innerHTML += "RAF: " + rafCount + ", " + (currentDate.getTime()) + " \n";
+			mostRecentDelays[arraysIndex] = delay;
+			delaysIndex = (delaysIndex + 1) % delaysToKeep;
+			var biggestRecentDelay = Math.max.apply(null, numArray);
+            output1.innerHTML = "Biggest recent RAF delay: " + biggestRecentDelay;
             rafCount++;
 
             if (!stopRAF) {
