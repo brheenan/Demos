@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // This is the iframe used to testing RAF's within iframes, both x-domain and same domain.
+        // The iframe has one main job, to request animation frames and count how many
+        // callbacks for request animation frames it's recieved.
+        //
+        // The host of the iframe will use post mesages to query the current RAF count to determine
+        // if we've processed RAFs as expected.
+        'use strict';
+        
+        var rafCount = 0;
+        var stopRAF = false;
+
+        function RAFCallback() {
+            var currentDate = new Date();
+            var output1 = document.getElementById("output1");
+
+            var delay = currentDate.getTime() - lastCallback.getTime();
+            if (delay >= 1000) {
+                output1.innerHTML += "DELAY: " + delay + "!!!!!!!\n";
+            }
+            lastCallback = currentDate;
+
+            output1.innerHTML += "RAF: " + rafCount + ", " + (currentDate.getTime()) + " \n";
+            rafCount++;
+
+            if (!stopRAF) {
+                window.requestAnimationFrame(RAFCallback);
+            }
+        }
+
+        var lastCallback = new Date();
+        window.requestAnimationFrame(RAFCallback);
+
+        function receiveMessage(event) {
+            if (event.data.getRAFCount) {
+                event.source.postMessage({ RAFCount: rafCount, RAFCountMsg: true }, "*");
+            }
+            else if (event.data.stopRAF) {
+                stopRAF = true;
+            }
+        }
+
+        window.addEventListener("message", receiveMessage);
+    </script>
+</head>
+<body>
+    <div>
+        <div id="output1" style=" border: 1px solid black; overflow: scroll; white-space: pre; display: inline-block"></div>
+    </div>
+</body>
+</html>
